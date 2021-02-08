@@ -1,0 +1,9 @@
+[submodule "sd-sys"]
+	path = sd-sys
+	url = git@github.com:ente76/sd-sys.git
+[submodule "sd-id128"]
+	path = sd-id128
+	url = git@github.com:ente76/sd-id128.git
+[submodule "sd-journal"]
+	path = sd-journal
+	url = git@github.com:ente76/sd-journal.git
