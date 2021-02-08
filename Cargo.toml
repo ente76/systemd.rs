@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "sd-journal",
+    "sd-id128",
+    "sd-sys"
+]
