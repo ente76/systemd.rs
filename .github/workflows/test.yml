@@ -1,0 +1,42 @@
+name: test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+
+jobs:
+  test:
+    name: test
+
+    runs-on: ${{ matrix.system }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: "ubuntu-20.04"
+            features: "--features \"240\""
+          - system: "ubuntu-18.04"
+            features: "--features \"233\""
+          - system: "ubuntu-16.04"
+            features: ""
+    
+    steps:
+    - name: checkout sd-sys
+      uses: actions/checkout@v2
+    - name: update
+      run: sudo apt-get upgrade
+    - name: install libsystemd
+      run: sudo apt-get install -y libsystemd-dev
+    - name: build
+      run: cargo build --verbose --no-default-features ${{ matrix.features }}
+    - name: run tests
+      run: cargo test --verbose --no-default-features ${{ matrix.features }}
+    - name: doc test
+      run: cargo doc --no-default-features ${{ matrix.features }}
